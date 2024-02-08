@@ -19,15 +19,18 @@ classDiagram
     Ticket : +int ticket_id
     Ticket : +int place_number
     Ticket : +float total_cost
+    Ticket : +vector Ticket
     
     class VipTicket
     VipTicket : +int ticket_id
     VipTicket : +int place_number
     VipTicket : +float total_cost
-    
+    VipTicket : +vector VipTicket
+
     class Admin
     Admin : +ticket_cost
     Admin : change_ticket_cost()
+    
 
     Ticket <|-- Car
     VipTicket <|-- Car
