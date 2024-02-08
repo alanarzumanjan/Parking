@@ -84,21 +84,7 @@ public:
     }
 };
 
-class Ticket {
-    private:
-        vector<Ticket> tickets;
-    public:
-        int ticket_id;
-        int place_number;
-        float total_cost = 10;
-        Ticket(int id, int pn) : 
-            ticket_id(id), place_number(pn){}
-};
 
-class VipTicket: public Ticket {
-    float total_cost = 15;
-    VipTicket(int ip, int pn) : Ticket(ip, pn){}
-};
 
 void main_menu(){
     cout << "--->Parking<---" << endl;
@@ -110,7 +96,7 @@ void main_menu(){
 
 int main(){
     Car car(0,"");
-
+    
     int choice;
     do{
         main_menu();
@@ -120,6 +106,7 @@ int main(){
         {
         case 1:
             car.car_autorization();
+            
             break;
         case 2:
 
