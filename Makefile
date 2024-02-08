@@ -1,4 +1,4 @@
-TARGET = park
+TARGET = main
 SRC_FILE = $(TARGET).cpp
 
 CC = g++
