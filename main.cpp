@@ -14,19 +14,29 @@ class Car
 {
 public:
     int car_number;
-    float parking_time;
+    string parking_time;
 
-    Car(int car_number, float parking_time): car_number(car_number), parking_time(parking_time) {}
+    Car(int car_number, string parking_time): car_number(car_number), parking_time(parking_time) {}
     
     void car_autorization(){
-        cout << "Enter your car number:";
+        cout << "Enter your car number: ";
         cin >> car_number;
+        cout << endl;
+        // need time sleep 2-3s
     }
-    
+
+    string calculate_time(){
+        int parking_seconds = 10 + rand() % 250;
+        int hours = parking_seconds / 3600; // 1 h = 3600 sec
+        int minutes = (parking_seconds % 3600) / 60; // 1 min = 60 sec
+        parking_time = to_string(hours) + "h " + to_string(minutes) + "m";
+        return parking_time;
+    }
+
 };
 
 void main_menu(){
-    cout << "====>Parking<====" << endl;
+    cout << "--->Parking<---" << endl;
     cout << "1. Parking Autorization" << endl;
     cout << "2. Admin" << endl;
     cout << "3. Exit" << endl;
@@ -34,7 +44,7 @@ void main_menu(){
 }
 
 int main(){
-    Car car;
+    Car car(0,"");
 
     int choice;
     do{
