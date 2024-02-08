@@ -10,11 +10,6 @@ public:
 
     Admin(int tc) : ticket_cost(tc) {}
 
-    void displayticket_cost() const
-    {
-        cout << "Price: " << ticket_cost << endl;
-    }
-
     void change_ticket_cost()
     {
         int ticketType;
