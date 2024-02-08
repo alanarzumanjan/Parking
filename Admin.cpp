@@ -46,7 +46,7 @@ public:
         case 3:
             cout << "Enter price for 1 day ticket (between 25 and 40 dollars): ";
             cin >> price;
-            if (price >= 1 && price <= 10) {
+            if (price >= 25 && price <= 40) {
                 ticket_cost = price;
                 cout << "Price for 1 day ticket: $" << ticket_cost << endl;
             } else {
