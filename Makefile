@@ -16,6 +16,6 @@ clean:
 	rm -f $(TARGET) *.o
 	
 push:
-	git add .
+	git add *
 	git commit -m "mama"
 	git push
