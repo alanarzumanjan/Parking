@@ -17,6 +17,7 @@ classDiagram
 
     class Ticket
     Ticket : +int ticket_id
+    Ticket : +int cost_hour
     Ticket : +int place_number
     Ticket : +float total_cost
     Ticket : +vector Ticket
@@ -24,6 +25,7 @@ classDiagram
 
     class VipTicket
     VipTicket : +int ticket_id
+    VipTicket : +int cost_hour
     VipTicket : +int place_number
     VipTicket : +float total_cost
     VipTicket : +vector VipTicket
