@@ -2,13 +2,12 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <thread> // for using his_thread::sleep_for
-#include <chrono> // usingseconds 
+#include <ctime> // for time()
+#include <cstdlib> // for srand() and rand()
+#include <chrono> // for using chrono
+#include <thread> // for using sleep_for
 
 using namespace std;
-
-// please don't change this file
-// here comes the connection code of each
 
 class Car
 {
@@ -32,7 +31,6 @@ public:
         parking_time = to_string(hours) + "h " + to_string(minutes) + "m";
         return parking_time;
     }
-
 };
 
 class Parking {
@@ -105,9 +103,9 @@ public:
         switch (ticketType)
         {
         case 1:
-            cout << "Enter price for 1 hour ticket (between 1 and 10 dollars): ";
+            cout << "Enter price for 1 hour ticket (between 1 and 100 dollars): ";
             cin >> price;
-            if (price >= 1 && price <= 10) {
+            if (price >= 1 && price <= 100) {
                 ticket_cost = price;
                 cout << "Price for 1 hour ticket: $" << ticket_cost << endl;
             } 
@@ -116,23 +114,23 @@ public:
             }
             break;
         case 2:
-            cout << "Enter price for 2 hour ticket (between 5 and 15 dollars): ";
+            cout << "Enter price for 2 hour ticket (between 5 and 100 dollars): ";
             cin >> price;
-            if (price >= 5 && price <= 15) {
+            if (price >= 5 && price <= 100) {
                 ticket_cost = price;
                 cout << "Price for 2 hour ticket: $" << ticket_cost << endl;
             } 
             else {
-                cout << "Invalid price! Please enter a value between 5 and 15 dollars.\n";
+                cout << "Invalid price! Please enter a value between 5 and 100 dollars.\n";
             }
             break;
         case 3:
-            cout << "Enter price for 1 day ticket (between 25 and 40 dollars): ";
+            cout << "Enter price for 1 day ticket (between 25 and 200 dollars): ";
             cin >> price;
-            if (price >= 1 && price <= 10) {
+            if (price >= 25 && price <= 200) {
                 ticket_cost = price;
                 cout << "Price for 1 day ticket: $" << ticket_cost << endl;
-            } 
+            }
             else {
                 cout << "Invalid price! Please enter a value between 25 and 40 dollars.\n";
             }
@@ -146,7 +144,7 @@ public:
 
 void main_menu(){
     cout << "--->Parking<---" << endl;
-    cout << "1. Parking Autorization" << endl;
+    cout << "1. Parking Authorization" << endl;
     cout << "2. Admin" << endl;
     cout << "3. Exit" << endl;
     cout << "Enter your choice: ";
@@ -154,7 +152,7 @@ void main_menu(){
 
 int main(){
     Car car(0,"");
-    
+    Admin admin(0);
     int choice;
     do{
         main_menu();
@@ -164,21 +162,18 @@ int main(){
         {
         case 1:
             car.car_autorization();
-
             break;
         case 2:
-
+            admin.change_ticket_cost();
             break;
         case 3:
             cout << "Exiting program.." << endl;
-            // need time sleep 2-3s
+            this_thread::sleep_for(chrono::seconds(2)); // Sleep for 2 seconds
             break;
         default:
-            cout << "Incorrect answer, repeat please" << endl;
-    
+            cout << "Incorrect answer, please repeat." << endl;
         } 
-    }while(choice!=3);
+    }while(choice != 3);
     
-
     return 0;
 }
