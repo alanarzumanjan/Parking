@@ -1,4 +1,4 @@
-TARGET = main
+TARGET = ticket
 SRC_FILE = $(TARGET).cpp
 
 CC = g++
