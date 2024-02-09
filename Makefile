@@ -18,5 +18,5 @@ clean:
 push:
 	git add .
 	git add *
-	git commit -m "mama"
+	git commit -a -m "mama"
 	git push
