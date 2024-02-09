@@ -34,6 +34,7 @@ classDiagram
     class Admin
         Admin : +ticket_cost
         Admin : change_ticket_cost()
+        Admin : printout of free and occupied seats()
     
 
     Ticket <|-- Car

@@ -20,8 +20,7 @@ public:
     void car_autorization(){
         cout << "Enter your car number: ";
         cin >> car_number;
-        cout << endl;
-        // need time sleep 2-3s
+        this_thread::sleep_for(chrono::seconds(2));
     }
 
     string calculate_time(){
@@ -165,7 +164,7 @@ int main(){
         case 1:
             car.car_autorization();
             parking.fill_random_lots();
-            
+
             break;
         case 2:
             admin.change_ticket_cost();
@@ -173,6 +172,7 @@ int main(){
         case 3:
             cout << "Exiting program.." << endl;
             // need time sleep 2-3s
+            this_thread::sleep_for(chrono::seconds(2));
             break;
         default:
             cout << "Incorrect answer, please repeat." << endl;
