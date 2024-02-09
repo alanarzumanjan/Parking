@@ -16,8 +16,8 @@ public:
         int price;
 
         cout << "Enter your ticket price:\n";
-        cout << "Press 1 for Default ticket\n";
-        cout << "Press 2 for Vip ticket\n";
+        cout << "Press 1 to set price for Default ticket\n";
+        cout << "Press 2 to set price for Vip ticket\n";
         cin >> ticketType;
 
         switch (ticketType)
