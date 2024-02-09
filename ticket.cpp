@@ -16,6 +16,8 @@ class Ticket {
         
         void printVipTicket() {
             // every next ticket id += 1
+            // place_number должен выбираться из свободных мест
+            // + спрос какой билет вы хотите
             cout << "Ticket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
             "\nCost per hour: " << cost_hour <<
