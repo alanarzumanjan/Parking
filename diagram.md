@@ -8,6 +8,7 @@ classDiagram
         Car : +float parking_time
         Car : car_autorization()
         Car : calculate_time()
+        Car : car_end()
 
     class Parking
         Parking : +int max_places
@@ -32,7 +33,7 @@ classDiagram
         VipTicket : +vector VipTicket
         VipTicket : printVipTicket()
         VipTicket : print_check_ticket()
-    
+        
     class Admin
         Admin : +ticket_cost
         Admin : change_ticket_cost()
