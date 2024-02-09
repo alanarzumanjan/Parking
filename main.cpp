@@ -31,27 +31,7 @@ public:
 
     void car_autorization(){
         cout << "Enter your car number: ";
-        cin >> car_number;
-        int choice;
-        do{
-            cout << "Whitch ticket do you need?" << endl;
-            cout << "1. VipTicket" << endl;
-            cout << "2. Default Ticket" << endl;
-            cout << "Enter your choice: ";
-            cin >> choice;
-
-            switch(choice){
-                case 1:
-                    return_choice(choice);
-                    break;
-                case 2:
-                    return_choice(choice);
-                    break;
-                default:
-                    cout << "Incorrect answer, repeat please" << endl;
-            }
-        }while(choice != 1 | choice != 2);
-            
+        cin >> car_number; 
     }
 
     void car_end(){
@@ -252,6 +232,34 @@ void main_menu(){
     cout << "Enter your choice: ";
 }
 
+void choice_ticket(){
+    VipTicket vipticket;
+    Ticket ticket;
+    int choice;
+    cout << "Whitch ticket do you need?" << endl;
+    cout << "1. VipTicket" << endl;
+    cout << "2. Default Ticket" << endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
+    do{
+        switch (choice)
+        {
+            case 1:
+                cout << endl;
+                vipticket.printVipTicket();
+                break;
+            case 2:
+                cout << endl;
+                ticket.printTicket();
+                break;
+            default:
+                cout << "Incorrect answer" << endl;
+                break;
+        }
+    }while(choice != 1 && choice != 2);
+    
+}
+
 int main(){
     Car car(0,"");
     Admin admin(0);
@@ -269,6 +277,7 @@ int main(){
         case 1:
             car.car_autorization();
             parking.fill_random_lots();
+            choice_ticket();
             ticket.printTicket();
             car.car_end();
             break;
