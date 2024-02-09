@@ -234,6 +234,8 @@ int main(){
     Car car(0,"");
     Admin admin(0);
     Parking parking;
+    Ticket ticket;
+    VipTicket vipticket;
     int choice;
 
     do{
