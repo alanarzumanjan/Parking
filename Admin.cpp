@@ -16,43 +16,33 @@ public:
         int price;
 
         cout << "Enter your ticket price:\n";
-        cout << "Press 1 for 1 hour ticket:\n";
-        cout << "Press 2 for 2 hour ticket\n";
-        cout << "Press 3 for 1 day ticket\n";
+        cout << "Press 1 for Default ticket\n";
+        cout << "Press 2 for Vip ticket\n";
         cin >> ticketType;
 
         switch (ticketType)
         {
         case 1:
-            cout << "Enter price for 1 hour ticket (between 1 and 10 dollars): ";
+            cout << "Enter price for Default ticket (between 1 and 100 dollars): ";
             cin >> price;
-            if (price >= 1 && price <= 10) {
+            if (price >= 1 && price <= 100) {
                 ticket_cost = price;
-                cout << "Price for 1 hour ticket: $" << ticket_cost << endl;
+                cout << "Price for Default ticket: $" << ticket_cost << endl;
             } else {
-                cout << "Invalid price! Please enter a value between 1 and 10 dollars.\n";
+                cout << "Invalid price! Please enter a value between 1 and 100 dollars.\n";
             }
             break;
         case 2:
-            cout << "Enter price for 2 hour ticket (between 5 and 15 dollars): ";
+            cout << "Enter price for Vip ticket (between 5 and 100 dollars): ";
             cin >> price;
-            if (price >= 5 && price <= 15) {
+            if (price >= 5 && price <= 100) {
                 ticket_cost = price;
-                cout << "Price for 2 hour ticket: $" << ticket_cost << endl;
+                cout << "Price for Vip ticket: $" << ticket_cost << endl;
             } else {
-                cout << "Invalid price! Please enter a value between 5 and 15 dollars.\n";
+                cout << "Invalid price! Please enter a value between 5 and 100 dollars.\n";
             }
             break;
-        case 3:
-            cout << "Enter price for 1 day ticket (between 25 and 40 dollars): ";
-            cin >> price;
-            if (price >= 25 && price <= 40) {
-                ticket_cost = price;
-                cout << "Price for 1 day ticket: $" << ticket_cost << endl;
-            } else {
-                cout << "Invalid price! Please enter a value between 25 and 40 dollars.\n";
-            }
-            break;
+
         default:
             cout << "Invalid choice!\n";
             break;
