@@ -15,6 +15,7 @@ class Ticket {
             ticket_id(id), place_number(pn){}
         
         void printVipTicket() {
+            // every next ticket id += 1
             cout << "Ticket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
             "\nCost per hour: " << cost_hour <<
@@ -28,6 +29,8 @@ class VipTicket: public Ticket {
     VipTicket(int ip, int pn) : Ticket(ip, pn){}
 
     void printVipTicket() {
+        // every next ticket id += 1
+        // place_number должен выбираться из свободных мест
         cout << "VIP ticket ID: " << ticket_id <<
         "\nPlace number: " << place_number <<
         "\nCost per hour: " << cost_hour <<

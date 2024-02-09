@@ -153,7 +153,9 @@ void main_menu(){
 int main(){
     Car car(0,"");
     Admin admin(0);
+    Parking parking;
     int choice;
+
     do{
         main_menu();
         cin >> choice;
@@ -162,13 +164,15 @@ int main(){
         {
         case 1:
             car.car_autorization();
+            parking.fill_random_lots();
+            
             break;
         case 2:
             admin.change_ticket_cost();
             break;
         case 3:
             cout << "Exiting program.." << endl;
-            this_thread::sleep_for(chrono::seconds(2)); // Sleep for 2 seconds
+            // need time sleep 2-3s
             break;
         default:
             cout << "Incorrect answer, please repeat." << endl;
