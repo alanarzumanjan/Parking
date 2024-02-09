@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "park.cpp"
+#include "main.cpp"
 
 using namespace std;
 
@@ -13,15 +14,23 @@ class Ticket {
     public:
         int cost_hour = 20;
         Parking parking;
+        Car car;
         int place_number;
         float total_cost = 10;
-        Ticket() : ticket_id(next_ticket_id++), place_number(parking.notfilled_lots[ticket_id - 1]) {}
+        Ticket(int cn) : ticket_id(next_ticket_id++), place_number(parking.notfilled_lots[ticket_id - 1]) {}
         
         void printTicket() {
             // every next ticket id += 1
             // place_number должен выбираться из свободных мест
             // + спрос какой билет вы хотите
             cout << "Ticket ID: " << ticket_id <<
+            "\nPlace number: " << place_number <<
+            "\nCost per hour: " << cost_hour << endl;
+        }
+
+        void printCheck() {
+            cout << "Car number: " << car.car_number <<
+            "\nTicket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
             "\nCost per hour: " << cost_hour <<
             "\nTotal cost: " << total_cost << endl;
