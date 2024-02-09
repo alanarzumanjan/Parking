@@ -17,7 +17,6 @@ clean:
 	
 push:
 	git add .
-	git add *
 	git commit -a -m "mama"
 	git pull 
 	git rebase
