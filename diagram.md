@@ -34,13 +34,13 @@ classDiagram
     class Admin
         Admin : +ticket_cost
         Admin : change_ticket_cost()
-        Admin : printout of free and occupied seats()
+        Admin : printout_of_free_and_occupied_seats()
     
 
     Ticket <|-- Car
     VipTicket <|-- Car
-    Ticket <|-- Parking
-    VipTicket <|-- Parking
-    Admin <|-- Parking
     
+    Admin <|-- Parking
+    Parking <|-- Ticket
+    Parking <|-- VipTicket
 ```
