@@ -238,6 +238,7 @@ int main(){
     VipTicket vipticket;
     int choice;
 
+    
     do{
         main_menu();
         cin >> choice;
