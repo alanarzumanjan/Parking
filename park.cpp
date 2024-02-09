@@ -49,7 +49,8 @@ public:
                 cout << lot << " ";
             }
             cout << endl;
-        } else {
+        }
+        else {
             cout << "All parking lots are filled." << endl;
         }
     }

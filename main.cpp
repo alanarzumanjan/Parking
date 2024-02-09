@@ -36,6 +36,7 @@ class Parking {
 public:
     static const int max_lots = 50;  // Number of parking lots
     int filled_lots;
+    vector<int> occupied_lots;
     vector<int> notfilled_lots;
 
     Parking() : filled_lots(0) {
@@ -70,7 +71,7 @@ public:
     void print_notfilled_lots() const {
         cout << "Filled Lots: " << filled_lots << endl;
         if (filled_lots < max_lots) {
-            cout << "Parking lots not filled: ";
+            cout << "Not filled lots: ";
             for (int lot : notfilled_lots) {
                 cout << lot << " ";
             }
@@ -81,54 +82,76 @@ public:
     }
 };
 
-class Admin
+class Admin: public Parking
 {
 public:
     int ticket_cost;
+    vector<int> occupied_lots;
+    vector<int> free_lots;
 
     Admin(int tc) : ticket_cost(tc) {}
 
-    void change_ticket_cost()
-    {
+    void admin_functions() {
         int ticketType;
         int price;
+        Parking parking;
 
         cout << "Enter your ticket price:\n";
         cout << "Press 1 to set price for Default ticket\n";
         cout << "Press 2 to set price for Vip ticket\n";
+        cout << "Press 3 to see Free/filling Lots.\n";
+        cout << "Press 4 to exit\n";
+        cout << "Enter your choice: ";
         cin >> ticketType;
 
-        switch (ticketType)
-        {
-        case 1:
-            cout << "Enter price for Default ticket (between 1 and 1000 dollars): ";
-            cin >> price;
-            if (price >= 1 && price <= 1000) {
-                ticket_cost = price;
-                cout << "Price for Default ticket: $" << ticket_cost << endl;
-            } 
-            else {
-                cout << "Invalid price! Please enter a value between 1 and 100 dollars.\n";
-            }
-            break;
-        case 2:
-            cout << "Enter price for Vip ticket (between 5 and 1000 dollars): ";
-            cin >> price;
-            if (price >= 5 && price <= 1000) {
-                ticket_cost = price;
-                cout << "Price for Vip ticket: $" << ticket_cost << endl;
-            } 
-            else {
-                cout << "Invalid price! Please enter a value between 5 and 100 dollars.\n";
-            }
-            break;
+        switch (ticketType) {
+            case 1:
+                cout << "Enter price for Default ticket (between 1 and 1000 dollars): ";
+                cin >> price;
+                if (price >= 1 && price <= 1000) {
+                    ticket_cost = price;
+                    cout << "Price for Default ticket: $" << ticket_cost << endl;
+                } 
+                else {
+                    cout << "Invalid price! Please enter a value between 1 and 1000 dollars.\n";
+                }
 
-        default:
-            cout << "Invalid choice!\n";
-            break;
+                break;
+            case 2:
+                cout << "Enter price for Vip ticket (between 5 and 1000 dollars): ";
+                cin >> price;
+                if (price >= 5 && price <= 1000) {
+                    ticket_cost = price;
+                    cout << "Price for Vip ticket: $" << ticket_cost << endl;
+                } 
+                else {
+                    cout << "Invalid price! Please enter a value between 5 and 1000 dollars.\n";
+                }
+
+                break;
+            case 3:
+                cout << endl;
+                if (parking.notfilled_lots.empty()) {
+                    cout << "No free lots available.\n";
+                } 
+                else {
+                    int notfilled_lots_size = parking.notfilled_lots.size();
+                    cout << "Free Lots: " << notfilled_lots_size << endl;
+                    parking.print_notfilled_lots();
+                }
+                cout << endl;
+                break;
+            case 4:
+                cout << "Exit.." << endl;
+                break;
+            default:
+                cout << "Invalid choice!\n";
+                break;
         }
+        cout << endl;
     }
 };
+
 class Ticket {
     private:
         vector<Ticket> tickets;
@@ -202,7 +225,7 @@ int main(){
             
             break;
         case 2:
-            admin.change_ticket_cost();
+            admin.admin_functions();
             break;
         case 3:
             cout << "Exiting program.." << endl;
