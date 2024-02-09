@@ -129,6 +129,52 @@ public:
         }
     }
 };
+class Ticket {
+    private:
+        vector<Ticket> tickets;
+        static int next_ticket_id;
+    protected:
+        int ticket_id;
+    public:
+        int cost_hour = 20;
+        Parking parking;
+        int place_number;
+        float total_cost = 10;
+        Ticket() : ticket_id(next_ticket_id++), place_number(parking.notfilled_lots[ticket_id - 1]) {}
+        
+        void printTicket() {
+            cout << "Ticket ID: " << ticket_id <<
+            "\nPlace number: " << place_number <<
+            "\nCost per hour: " << cost_hour <<
+            "\nTotal cost: " << total_cost << endl;
+        }
+};
+
+class VipTicket: public Ticket {
+    private:
+        vector<Ticket> viptickets;
+        static int next_vip_ticket_id;
+    protected:
+        int vip_ticket_id;
+    public:
+        Parking parking;
+        int place_number;
+        int cost_hour = 40;
+        float total_cost = 15;
+        VipTicket() : vip_ticket_id(next_vip_ticket_id++), place_number(parking.notfilled_lots[ticket_id - 1]){};
+
+        void printVipTicket() {
+            // every next ticket id += 1
+            // place_number должен выбираться из свободных мест
+            cout << "VIP ticket ID: " << ticket_id <<
+            "\nPlace number: " << place_number <<
+            "\nCost per hour: " << cost_hour <<
+            "\nTotal cost: " << total_cost << endl;
+        }
+};
+
+int Ticket::next_ticket_id = 1;
+int VipTicket::next_vip_ticket_id = 1;
 
 void main_menu(){
     cout << "--->Parking<---" << endl;
