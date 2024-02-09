@@ -19,4 +19,4 @@ push:
 	git add .
 	git add *
 	git commit -m "mama"
-	git push
+	git push origin main
