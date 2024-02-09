@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Ticket {
+class Ticket: public Car {
     private:
         vector<Ticket> tickets;
         static int next_ticket_id;
@@ -17,7 +17,7 @@ class Ticket {
         Car car;
         int place_number;
         float total_cost = 10;
-        Ticket(int cn) : ticket_id(next_ticket_id++), place_number(parking.notfilled_lots[ticket_id - 1]) {}
+        Ticket() : ticket_id(next_ticket_id++), place_number(parking.notfilled_lots[ticket_id - 1]) {}
         
         void printTicket() {
             // every next ticket id += 1
@@ -33,7 +33,8 @@ class Ticket {
             "\nTicket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
             "\nCost per hour: " << cost_hour <<
-            "\nTotal cost: " << total_cost << endl;
+            "\nTotal cost: " << total_cost <<
+            "\nTotal time: " << car.calculate_time() << endl;
         }
 };
 
