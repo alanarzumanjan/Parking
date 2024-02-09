@@ -41,7 +41,8 @@ public:
 
     Parking() : filled_lots(0) {
         fill_random_lots();
-    }
+    }   
+    
 
     void fill_random_lots() {
         // Seed the random number generator with the current time
