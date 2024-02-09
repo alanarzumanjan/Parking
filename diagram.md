@@ -22,6 +22,7 @@ classDiagram
         Ticket : +float total_cost
         Ticket : +vector Ticket
         Ticket : printTicket()
+        Ticket : printout_Ticket()
 
     class VipTicket
         VipTicket : +int ticket_id
@@ -30,6 +31,7 @@ classDiagram
         VipTicket : +float total_cost
         VipTicket : +vector VipTicket
         VipTicket : printVipTicket()
+        VipTicket : printoutVipTicket()
     
     class Admin
         Admin : +ticket_cost
