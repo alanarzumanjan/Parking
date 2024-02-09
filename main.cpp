@@ -17,10 +17,8 @@ public:
 
     Car(int car_number, string parking_time): car_number(car_number), parking_time(parking_time) {}
     
-    void car_autorization(){
-        cout << "Enter your car number: ";
-        cin >> car_number;
-        this_thread::sleep_for(chrono::seconds(10));
+    int return_choice(int choice){
+        return choice;
     }
 
     string calculate_time(){
@@ -29,6 +27,31 @@ public:
         int minutes = (parking_seconds % 3600) / 60; // 1 min = 60 sec
         parking_time = to_string(hours) + "h " + to_string(minutes) + "m";
         return parking_time;
+    }
+
+    void car_autorization(){
+        cout << "Enter your car number: ";
+        cin >> car_number;
+        int choice;
+        do{
+            cout << "Whitch ticket do you need?" << endl;
+            cout << "1. VipTicket" << endl;
+            cout << "2. Default Ticket" << endl;
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch(choice){
+                case 1:
+                    return_choice(choice);
+                    break;
+                case 2:
+                    return_choice(choice);
+                    break;
+                default:
+                    cout << "Incorrect answer, repeat please" << endl;
+            }
+        }while(choice != 1 | choice != 2);
+            
     }
 
     void car_end(){
@@ -49,7 +72,6 @@ public:
             }
 
         }while(choice!=1);
-        
     }
 };
 
@@ -191,8 +213,8 @@ class Ticket {
         void printTicket() {
             cout << "Ticket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
-            "\nCost per hour: " << cost_hour <<
-            "\nTotal cost: " << total_cost << endl;
+            "\nCost per hour: " << cost_hour << endl;
+            this_thread::sleep_for(chrono::seconds(10));
         }
 };
 
@@ -214,8 +236,8 @@ class VipTicket: public Ticket {
             // place_number должен выбираться из свободных мест
             cout << "VIP ticket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
-            "\nCost per hour: " << cost_hour <<
-            "\nTotal cost: " << total_cost << endl;
+            "\nCost per hour: " << cost_hour << endl;
+            this_thread::sleep_for(chrono::seconds(10));
         }
 };
 
@@ -247,6 +269,7 @@ int main(){
         case 1:
             car.car_autorization();
             parking.fill_random_lots();
+            ticket.printTicket();
             car.car_end();
             break;
         case 2:
