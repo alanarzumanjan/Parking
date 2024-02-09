@@ -164,7 +164,7 @@ int main(){
         case 1:
             car.car_autorization();
             parking.fill_random_lots();
-
+            
             break;
         case 2:
             admin.change_ticket_cost();
