@@ -115,7 +115,7 @@ class Ticket: public Car {
         static int ticket_id;
         float seconds = parking_seconds;
     public:
-        int cost_hour = 20;
+        static int cost_hour;
         Parking parking;
         int place_number;
         float total_cost;
