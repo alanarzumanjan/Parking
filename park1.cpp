@@ -50,7 +50,7 @@ public:
             cout << "Car parked at spot " << spot << endl;
             return true;
         } else {
-            cout << "Spot " << spot << " is already taken." << endl;
+            cout << "Spot " << spot << " is already taken. Please choose another spot." << endl;
             return false;
         }
     }
@@ -76,21 +76,19 @@ int main() {
     // Access and display the information
     parkingLot.print_notfilled_lots();
 
+    // Allow user to choose a spot
     int chosenSpot;
-    while (true) {
-        cout << "Enter a spot to park (-1 to exit): ";
+    cout << "Enter a spot to park: ";
+    cin >> chosenSpot;
+
+    // Simulate the user taking the chosen spot or prompt to choose another spot
+    while (!parkingLot.takeParkingSpot(chosenSpot)) {
+        cout << "Please choose another spot: ";
         cin >> chosenSpot;
-
-        if (chosenSpot == -1) {
-            break;
-        }
-
-        // Simulate the user taking the chosen spot
-        parkingLot.takeParkingSpot(chosenSpot);
-
-        // Access and display the updated information
-        parkingLot.print_notfilled_lots();
     }
+
+    // Access and display the final information
+    parkingLot.print_notfilled_lots();
 
     return 0;
 }
