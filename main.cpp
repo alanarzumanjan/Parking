@@ -134,8 +134,6 @@ public:
 };
 
 class Ticket: public Car, public Parking {
-    private:
-        vector<Ticket> tickets;
     protected:
         static int ticket_id;
         float seconds = parking_seconds;
@@ -179,8 +177,6 @@ class Ticket: public Car, public Parking {
 };
 
 class VipTicket: public Ticket {
-    private:
-        vector<Ticket> viptickets;
     public:
         Parking parking;
         int place_number;
@@ -225,7 +221,7 @@ int VipTicket::cost_hour = 40;
 
 class Admin: public Parking
 {
-    public:
+public:
     int ticket_cost;
     vector<int> occupied_lots;
     vector<int> free_lots;

@@ -35,15 +35,15 @@ classDiagram
         Ticket : update_total_cost()
         Ticket : setCostHour(int price)
         Ticket : printCheck(int chosenSpot, int type)
-
+    
     class VipTicket
-        VipTicket : +int ticket_id
+        VipTicket : +float total_cost
         VipTicket : +int cost_hour
         VipTicket : +int place_number
-        VipTicket : +float total_cost
-        VipTicket : +vector VipTicket
         VipTicket : printVipTicket()
-        VipTicket : print_check_ticket()
+        VipTicket : printCheck(int chosenSpot, int type)
+        VipTicket : update_total_cost()
+        VipTicket : setCostHour(int price)
         
     class Admin
         Admin: +int ticket_cost

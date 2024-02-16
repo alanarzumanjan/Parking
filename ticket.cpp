@@ -110,7 +110,6 @@ public:
 class Ticket: public Car, public Parking {
     private:
         vector<Ticket> tickets;
-        static int next_ticket_id;
     protected:
         static int ticket_id;
         float seconds = parking_seconds;
