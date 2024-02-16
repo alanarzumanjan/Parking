@@ -18,5 +18,4 @@ clean:
 push:
 	git add .
 	git commit -a -m "Markus super pony"
-	
 	git push
