@@ -9,8 +9,8 @@ class Admin {
 public:
     static const int max_lots = 50;  
     int ticket_cost;
-    vector<int> occupied_lots; // Moved to class scope
-    vector<int> free_lots; // Moved to class scope
+    vector<int> occupied_lots; 
+    vector<int> free_lots; 
 
     Admin(int tc) : ticket_cost(tc) {}
 

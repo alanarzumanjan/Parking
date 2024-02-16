@@ -224,8 +224,7 @@ int Ticket::cost_hour = 20;
 int VipTicket::cost_hour = 40;
 
 class Admin: public Parking
-{
-public:
+{public:
     int ticket_cost;
     vector<int> occupied_lots;
     vector<int> free_lots;
