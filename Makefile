@@ -23,3 +23,6 @@ push:
 rebase:
 	git pull
 	git rebase
+	git commit --amend
+	git rebase --continue
+	git rebase
