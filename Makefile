@@ -17,7 +17,6 @@ clean:
 	
 push:
 	git add .
-	git commit -a -m "mama"
-	git pull 
-	git rebase
+	git commit -a -m "Markus super pony"
+	
 	git push

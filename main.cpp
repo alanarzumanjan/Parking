@@ -349,7 +349,7 @@ int main(){
             this_thread::sleep_for(chrono::seconds(2));
                 choice_ticket(ticket, vipticket, car, type); // Pass 'type' by reference
                 cout << endl;
-                this_thread::sleep_for(chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(5));
                 parkingLot.print_notfilled_lots();
                 cout << "Enter a spot to park: ";
                 cin >> chosenSpot;
