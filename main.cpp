@@ -145,7 +145,11 @@ class Ticket: public Car, public Parking {
         int place_number;
         float total_cost;
         Ticket() : place_number(notfilled_lots[ticket_id - 1]), total_cost((seconds / 3600) * cost_hour) {}
-        
+
+        void updateTotalCost() {
+            total_cost = (parking_seconds / 3600.0) * cost_hour;
+        }
+
         static void setCostHour(int price) {
             cost_hour = price;
         }
@@ -157,6 +161,7 @@ class Ticket: public Car, public Parking {
         }
 
         void printCheck(int chosenSpot, int type) {
+            updateTotalCost();
             cout << "Your Check:" << endl;
             if (type == 1){
                 cout << "---VIP---" << endl; 
@@ -187,6 +192,9 @@ class VipTicket: public Ticket {
             cost_hour = price;
         }
 
+        void updateTotalCost() {
+            total_cost = (parking_seconds / 3600.0) * cost_hour;
+        }
         void printVipTicket() {
             ticket_id++;
             cout << "VIP ticket ID: " << ticket_id <<
@@ -194,6 +202,7 @@ class VipTicket: public Ticket {
         }
 
         void printCheck(int chosenSpot, int type) {
+            updateTotalCost();
             cout << "Your Check:" << endl;
             if (type == 1){
                 cout << "---VIP---" << endl; 
