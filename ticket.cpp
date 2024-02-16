@@ -107,7 +107,7 @@ public:
 };
 
 
-class Ticket: public Car {
+class Ticket: public Car, public Parking {
     private:
         vector<Ticket> tickets;
         static int next_ticket_id;
@@ -119,7 +119,7 @@ class Ticket: public Car {
         Parking parking;
         int place_number;
         float total_cost;
-        Ticket() : place_number(parking.notfilled_lots[ticket_id - 1]), total_cost((seconds / 3600) * cost_hour) {}
+        Ticket() : place_number(notfilled_lots[ticket_id - 1]), total_cost((seconds / 3600) * cost_hour) {}
         static void setCostHour(int price) {
             cost_hour = price;
         }
@@ -154,7 +154,7 @@ class VipTicket: public Ticket {
         int place_number;
         static int cost_hour;
         float total_cost;
-        VipTicket() : place_number(parking.notfilled_lots[ticket_id - 1]), total_cost((seconds / 3600) * cost_hour) {};
+        VipTicket() : place_number(notfilled_lots[ticket_id - 1]), total_cost((seconds / 3600) * cost_hour) {};
         
         static void setCostHour(int price) {
             cost_hour = price;
@@ -168,6 +168,15 @@ class VipTicket: public Ticket {
             "\nCost per hour: " << cost_hour <<
             "\nTotal cost: " << total_cost << endl;
         }
+
+        void printVipCheck() {
+            cout << "Car number: " << car_number <<
+            "\nVIP ticket ID: " << ticket_id <<
+            "\nPlace number: " << place_number <<
+            "\nCost per hour: " << cost_hour <<
+            "\nTotal cost: " << total_cost <<
+            "\nTotal time: " << calculate_time() << endl;
+        }
 };
 
 int Ticket::ticket_id = 0;
@@ -179,6 +188,7 @@ int main() {
     VipTicket ticket2;
     ticket1.printTicket();
     ticket2.printVipTicket();
+    cout << "============" << endl;
     ticket1.printCheck();
-    ticket2.printCheck();
+    ticket2.printVipCheck();
 }
