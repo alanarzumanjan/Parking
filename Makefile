@@ -19,3 +19,7 @@ push:
 	git add .
 	git commit -a -m "Markus is so hard pony"
 	git push
+
+rebase:
+	git pull
+	git rebase
