@@ -17,5 +17,11 @@ clean:
 	
 push:
 	git add .
+<<<<<<< HEAD
 	git commit -a -m "Markus super pony"
+=======
+	git commit -a -m "Markus is so hard pony"
+	git pull
+	git rebase
+>>>>>>> 19a19b3 (Markus is so hard pony)
 	git push

@@ -6,10 +6,20 @@ classDiagram
     class Car
         Car : +int car_number
         Car : +float parking_time
+        Car : +parking_seconds
+        Car : +hours
+        Car : +minutes
         Car : car_autorization()
         Car : calculate_time()
+<<<<<<< HEAD
         Car : car_end()
 
+=======
+        Car : return_choice(int choice)
+        Car : car_autorization()
+        Car : car_end()
+        Car : updateCarNumber(string number)
+>>>>>>> 19a19b3 (Markus is so hard pony)
     class Parking
         Parking : +int max_places
         Parking : +int filled_places
@@ -37,6 +47,7 @@ classDiagram
     class Admin
         Admin : +ticket_cost
         Admin : change_ticket_cost()
+<<<<<<< HEAD
         Admin : printout_of_free_and_occupied_seats()
     
 
@@ -46,4 +57,12 @@ classDiagram
     Admin <|-- Parking
     Parking <|-- Ticket
     Parking <|-- VipTicket
+=======
+        Admin : printout_of_free_and_fillingplaces()
+
+    VipTicket <|-- Ticket
+    Ticket <-- Car
+    Parking o-- Car
+    Parking <-- Admin
+>>>>>>> 19a19b3 (Markus is so hard pony)
 ```
