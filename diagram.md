@@ -22,9 +22,13 @@ classDiagram
 >>>>>>> 19a19b3 (Markus is so hard pony)
     class Parking
         Parking : +int max_places
-        Parking : +int filled_places
+        Parking : +int filled_lots
         Parking : +int notfilled_places
-        Parking : places_calculator()
+        Parking : fill_random_lots()
+        Parking : +int minNotFilled
+        Parking : +int maxNotFilled
+        Parking : takeParkingSpot()
+        Parking : print_notfilled_lots()
 
     class Ticket
         Ticket : +int ticket_id
@@ -45,24 +49,16 @@ classDiagram
         VipTicket : print_check_ticket()
         
     class Admin
-        Admin : +ticket_cost
-        Admin : change_ticket_cost()
-<<<<<<< HEAD
-        Admin : printout_of_free_and_occupied_seats()
-    
-
-    Ticket <|-- Car
-    VipTicket <|-- Car
-    
-    Admin <|-- Parking
-    Parking <|-- Ticket
-    Parking <|-- VipTicket
-=======
-        Admin : printout_of_free_and_fillingplaces()
+        Admin: +int ticket_cost
+        Admin: +int choice
+        Admin: +int price
+        Admin: main_menu()
+        Admin: choice_ticket()
+        Admin: set_ticket_cost()
+        Admin: printout_of_free_and_occupied_seats()
 
     VipTicket <|-- Ticket
     Ticket <-- Car
     Parking o-- Car
     Parking <-- Admin
->>>>>>> 19a19b3 (Markus is so hard pony)
 ```
