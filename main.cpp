@@ -360,7 +360,7 @@ int main(){
                 } 
                 this_thread::sleep_for(chrono::seconds(2));
             car.car_end();
-            this_thread::sleep_for(chrono::seconds(2));
+                
                 print_check(type, ticket, vipticket, chosenSpot);
             break;
         case 2:
@@ -378,4 +378,3 @@ int main(){
     
     return 0;
 }
-    
