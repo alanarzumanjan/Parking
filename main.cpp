@@ -1,39 +1,43 @@
 #include <iostream>
-#include <string> // data type - string 
-#include <vector> // vectors
-#include <fstream> // work ar file 
+#include <string>
+#include <vector>
 #include <ctime> // for time()
 #include <cstdlib> // for srand() and rand()
 #include <chrono> // for using chrono
 #include <thread> // for using sleep_for
+#include <algorithm>
+#include <cmath> // for math
+#include <iomanip> // Для fixed и setprecision
 
 using namespace std;
 
 class Car
 {
 public:
-    int car_number;
+    string car_number;
     string parking_time;
+    int parking_seconds = 100 + rand() % 3000;
+    int hours = parking_seconds / 3600;
+    int minutes = (parking_seconds % 3600) / 60;
 
-    Car(int car_number, string parking_time): car_number(car_number), parking_time(parking_time) {}
-    Car() : car_number(0), parking_time("") {}
+    Car(string car_number, string parking_time): car_number(car_number), parking_time(parking_time) {}
+    Car() : car_number(""), parking_time("") {}
+
 
     int return_choice(int choice){
         return choice;
     }
 
     string calculate_time(){
-        int parking_seconds = 10 + rand() % 250;
-        int hours = parking_seconds / 3600; // 1 h = 3600 sec
-        int minutes = (parking_seconds % 3600) / 60; // 1 min = 60 sec
         parking_time = to_string(hours) + "h " + to_string(minutes) + "m";
-
         return parking_time;
     }
 
     void car_autorization(){
-        cout << "Enter your car number: ";
+        cout << "Enter your car number. Dont't use spaces please. \nExample: LV442, EX-8083" << endl;
+        cout << "Your car number: ";
         cin >> car_number; 
+        // cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
     void car_end(){
@@ -46,15 +50,20 @@ public:
             cout << "Enter your choice: ";
             cin >> choice;
             if(choice == 1){
-                cout << endl << "Malacis)" << endl;
+                cout << endl << "Malacis)" << endl << endl;
             }
             else{
                 cout << endl << "Think again)" << endl;
-                this_thread::sleep_for(chrono::seconds(3));
+                this_thread::sleep_for(chrono::seconds(5));
             }
 
         }while(choice!=1);
     }
+
+    void updateCarNumber(string number) {
+        car_number = number;
+    }
+
 };
 
 class Parking {
@@ -107,66 +116,101 @@ public:
             cout << "All parking lots are filled." << endl;
         }
     }
+
+    bool takeParkingSpot(int spot) {
+        auto it = find(notfilled_lots.begin(), notfilled_lots.end(), spot);
+
+        if (it != notfilled_lots.end()) {
+            notfilled_lots.erase(it);
+            filled_lots++;
+            cout << "Car parked at spot " << spot << endl;
+            return true;
+        }
+        else {
+            cout << "Spot " << spot << " is already taken. Please choose another spot." << endl;
+            return false;
+        }
+    }
 };
 
-class Ticket: public Car {
+class Ticket: public Car, public Parking {
     private:
         vector<Ticket> tickets;
-        
     protected:
-        static int next_ticket_id;
-        int ticket_id;
+        static int ticket_id;
+        float seconds = parking_seconds;
     public:
         static int cost_hour;
         Parking parking;
-        Car car;
         int place_number;
         float total_cost;
-        Ticket() : ticket_id(next_ticket_id++), place_number(parking.notfilled_lots[ticket_id - 1]) {}
+        Ticket() : place_number(notfilled_lots[ticket_id - 1]), total_cost((seconds / 3600) * cost_hour) {}
+        
         static void setCostHour(int price) {
             cost_hour = price;
         }
         
         void printTicket() {
+            ticket_id++;
             cout << "Ticket ID: " << ticket_id <<
-            "\nPlace number: " << place_number <<
             "\nCost per hour: " << cost_hour << endl;
         }
 
-        void printCheck() {
-            cout << "Car number: " << car.car_number <<
+        void printCheck(int chosenSpot, int type) {
+            cout << "Your Check:" << endl;
+            if (type == 1){
+                cout << "---VIP---" << endl; 
+            }
+            else{
+                cout << "---Default---" << endl;
+            }
+            cout << "Car number: " << car_number <<
             "\nTicket ID: " << ticket_id <<
-            "\nPlace number: " << place_number <<
+            "\nPlace number: " << chosenSpot <<
             "\nCost per hour: " << cost_hour <<
-            "\nTotal cost: " << total_cost <<
-            "\nTotal time: " << car.calculate_time() << endl;
+            "\nTotal time: " << calculate_time() <<
+            "\nTotal cost: " << fixed << setprecision(2) << total_cost << "$" << endl;
         }
 };
 
 class VipTicket: public Ticket {
     private:
         vector<Ticket> viptickets;
-    protected:
-        int vip_ticket_id;
     public:
         Parking parking;
         int place_number;
         static int cost_hour;
         float total_cost;
-        VipTicket() : vip_ticket_id(next_ticket_id++), place_number(parking.notfilled_lots[vip_ticket_id - 1]){};
+        VipTicket() : place_number(notfilled_lots[ticket_id - 1]), total_cost((seconds / 3600) * cost_hour) {};
         
         static void setCostHour(int price) {
             cost_hour = price;
         }
 
         void printVipTicket() {
-            cout << "VIP ticket ID: " << vip_ticket_id <<
-            "\nPlace number: " << place_number <<
+            ticket_id++;
+            cout << "VIP ticket ID: " << ticket_id <<
             "\nCost per hour: " << cost_hour << endl;
+        }
+
+        void printCheck(int chosenSpot, int type) {
+            cout << "Your Check:" << endl;
+            if (type == 1){
+                cout << "---VIP---" << endl; 
+            }
+            else{
+                cout << "---Default---" << endl;
+            }
+            cout << "Car number: " << car_number <<
+            "\nTicket ID: " << ticket_id <<
+            "\nPlace number: " << chosenSpot <<
+            "\nCost per hour: " << cost_hour <<
+            "\nTotal time: " << calculate_time() <<
+            "\n\033[1;1mTotal cost: " << fixed << setprecision(2) << total_cost << "$\033[0m" << endl;
         }
 };
 
-int Ticket::next_ticket_id = 0;
+int Ticket::ticket_id = 0;
 int Ticket::cost_hour = 20;
 int VipTicket::cost_hour = 40;
 
@@ -193,25 +237,23 @@ public:
             
             switch (choice) {
                 case 1:
-                    cout << "Enter price for Default ticket (between 1 and 1000 dollars): ";
+                    cout << "Enter price for Default ticket (between 0 and 10 000 dollars): ";
                     cin >> price;
-                    if (price >= 1 && price <= 1000) {
+                    if (price >= 0 && price <= 10000) {
                         Ticket::setCostHour(price);
-                        cout << "Price for Default ticket: $" << ticket_cost << endl;
                     } 
                     else {
-                        cout << "Invalid price! Please enter a value between 1 and 1000 dollars.\n";
+                        cout << "Invalid price! Please enter a value between 0 and 10 000 dollars.\n";
                     }
                     break;
                 case 2:
-                    cout << "Enter price for Vip ticket (between 5 and 1000 dollars): ";
+                    cout << "Enter price for Vip ticket (between 0 and 100 000 dollars): ";
                     cin >> price;
-                    if (price >= 5 && price <= 1000) {
+                    if (price >= 0 && price <= 100000) {
                         VipTicket::setCostHour(price);
-                        cout << "Price for Vip ticket: $" << ticket_cost << endl;
                     } 
                     else {
-                        cout << "Invalid price! Please enter a value between 5 and 1000 dollars.\n";
+                        cout << "Invalid price! Please enter a value between 0 and 100 000 dollars.\n";
                     }
                     break;
                 case 3:
@@ -247,54 +289,79 @@ void main_menu(){
     cout << "Enter your choice: ";
 }
 
-void choice_ticket(){
-    VipTicket vipticket;
-    Ticket ticket;
+void choice_ticket(Ticket& ticket, VipTicket& vipticket, Car& car, int& type) {
     int choice;
-    cout << "Whitch ticket do you need?" << endl;
+    cout << "Which ticket do you need?" << endl;
     cout << "1. VipTicket" << endl;
     cout << "2. Default Ticket" << endl;
     cout << "Enter your choice: ";
     cin >> choice;
 
-    do{
-        switch (choice)
-        {
-            case 1:
-                cout << endl;
-                vipticket.printVipTicket();
-                break;
-            case 2:
-                cout << endl;
-                ticket.printTicket();
-                break;
-            default:
-                cout << "Incorrect answer" << endl;
-                break;
-        }
+    if (choice == 1) {
+        cout << endl;
+        vipticket.printVipTicket();
+        cout << "We will provide security for your car and promise not to hit it ourselves" << endl;
+        type = 1; // VIP ticket
+    } 
+    else if (choice == 2) {
+        cout << endl;
+        ticket.printTicket();
+        type = 2; // Default ticket
+    } 
+    else {
+        cout << "Incorrect answer" << endl;
+    }
+}
 
-    }while(choice != 1 && choice != 2); 
+void print_check(int type, Ticket& ticket, VipTicket& vipticket, int chosenSpot) {
+    if (type == 1) {
+        vipticket.printCheck(chosenSpot, type);
+    }
+    else {
+        ticket.printCheck(chosenSpot, type);
+    }
 }
 
 int main(){
-    Car car(0,"");
+    Car car("","");
     Admin admin(0);
     Parking parking;
+    Parking parkingLot;
     Ticket ticket;
     VipTicket vipticket;
+
     int choice;
+    int type;
+    int chosenSpot;
+
     parking.fill_random_lots();
 
     do{
         main_menu();
         cin >> choice;
-
+        int spot;
         switch (choice)
         {
         case 1:
             car.car_autorization();
-            choice_ticket();
+            ticket.updateCarNumber(car.car_number);
+            vipticket.updateCarNumber(car.car_number);
+            this_thread::sleep_for(chrono::seconds(2));
+                choice_ticket(ticket, vipticket, car, type); // Pass 'type' by reference
+                cout << endl;
+                this_thread::sleep_for(chrono::seconds(2));
+                parkingLot.print_notfilled_lots();
+                cout << "Enter a spot to park: ";
+                cin >> chosenSpot;
+
+                while (!parkingLot.takeParkingSpot(chosenSpot)) {
+                cout << "Please choose another spot: ";
+                cin >> chosenSpot;
+                } 
+                this_thread::sleep_for(chrono::seconds(2));
             car.car_end();
+            this_thread::sleep_for(chrono::seconds(2));
+                print_check(type, ticket, vipticket, chosenSpot);
             break;
         case 2:
             admin.admin_functions();
