@@ -23,7 +23,6 @@ public:
     Car(string car_number, string parking_time): car_number(car_number), parking_time(parking_time) {}
     Car() : car_number(""), parking_time("") {}
 
-
     int return_choice(int choice){
         return choice;
     }
@@ -368,9 +367,20 @@ int main(){
                 
                 print_check(type, ticket, vipticket, chosenSpot);
             break;
-        case 2:
-            admin.admin_functions();
+        case 2: {
+            string password;
+            cout << "Enter admin password: ";
+            cin >> password;
+            cout << endl;
+
+            if(password == "Mark"){
+                admin.admin_functions();
+            }
+            else{
+                cout << "Incorrect password!" << endl;
+            }
             break;
+        }
         case 3:
             cout << "Exiting program.." << endl;
             this_thread::sleep_for(chrono::seconds(1));
