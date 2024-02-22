@@ -373,7 +373,7 @@ int main(){
             cin >> password;
             cout << endl;
 
-            if(password == "Mark"){
+            if(password == "Mark228"){
                 admin.admin_functions();
             }
             else{
@@ -393,3 +393,4 @@ int main(){
     
     return 0;
 }
+//Admin password - Mark228
