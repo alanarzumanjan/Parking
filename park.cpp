@@ -1,3 +1,4 @@
+// Ilja Prihodko functions
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -41,6 +42,20 @@ public:
         }
     }
 
+    bool takeParkingSpot(int spot) {
+        auto it = find(notfilled_lots.begin(), notfilled_lots.end(), spot);
+
+        if (it != notfilled_lots.end()) {
+            notfilled_lots.erase(it);
+            filled_lots++;
+            cout << "Car parked at spot " << spot << endl;
+            return true;
+        } else {
+            cout << "Spot " << spot << " is already taken. Please choose another spot." << endl;
+            return false;
+        }
+    }
+
     void print_notfilled_lots() const {
         cout << "Filled Lots: " << filled_lots << endl;
         if (filled_lots < max_lots) {
@@ -60,6 +75,20 @@ int main() {
     Parking parkingLot;
 
     // Access and display the information
+    parkingLot.print_notfilled_lots();
+
+    // Allow user to choose a spot
+    int chosenSpot;
+    cout << "Enter a spot to park: ";
+    cin >> chosenSpot;
+
+    // Simulate the user taking the chosen spot or prompt to choose another spot
+    while (!parkingLot.takeParkingSpot(chosenSpot)) {
+        cout << "Please choose another spot: ";
+        cin >> chosenSpot;
+    }
+
+    // Access and display the final information
     parkingLot.print_notfilled_lots();
 
     return 0;

@@ -1,3 +1,4 @@
+// Mark functions
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -125,8 +126,6 @@ class Ticket: public Car, public Parking {
         
         void printTicket() {
             // every next ticket id += 1
-            // place_number должен выбираться из свободных мест
-            // + спрос какой билет вы хотите
             cout << "Ticket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
             "\nCost per hour: " << cost_hour << endl;
@@ -161,7 +160,6 @@ class VipTicket: public Ticket {
 
         void printVipTicket() {
             // every next ticket id += 1
-            // place_number должен выбираться из свободных мест
             cout << "VIP ticket ID: " << ticket_id <<
             "\nPlace number: " << place_number <<
             "\nCost per hour: " << cost_hour <<

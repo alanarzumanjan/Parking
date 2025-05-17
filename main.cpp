@@ -1,3 +1,4 @@
+// Alan 
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,7 +8,7 @@
 #include <thread> // for using sleep_for
 #include <algorithm>
 #include <cmath> // for math
-#include <iomanip> // Для fixed и setprecision
+#include <iomanip> // for fixed and setprecision
 
 using namespace std;
 
